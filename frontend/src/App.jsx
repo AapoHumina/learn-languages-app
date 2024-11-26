@@ -23,9 +23,19 @@ useEffect(() => {
   return (
     <div>
       <h1>Locations</h1>
-      <ul>
+       <ul style={{ listStyleType: "none", padding: 0 }}>
         {locations.map((location) => (
-          <li key={location.id}>{location.latitude} {location.longitude}</li>
+          <li key={location.id}
+              style={{
+                background: "#f7bd49",
+                margin: "10px 0",
+                padding: "10px",
+                borderRadius: "8px",
+                boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
+              }}
+          >
+          ID: {location.id}, Latitude: {location.latitude}, Longitude: {location.longitude}
+          </li>
         ))}
       </ul>
     </div>
