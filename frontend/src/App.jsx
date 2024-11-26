@@ -3,7 +3,6 @@ import './App.css'
 
 function App() {
   const [locations, setLocations] = useState([]);
-  const [error, setError] = useState(null);
 
 //The fetch() method starts the process of fetching a resource from a server.
 //The fetch() method returns a Promise that resolves to a Response object.
@@ -17,7 +16,6 @@ useEffect(() => {
       return response.json();
   })
   .then((data) => setLocations(data))
-  .catch((err) => setError(err.message));
 }, []);
 
   return (
