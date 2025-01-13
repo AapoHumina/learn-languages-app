@@ -7,11 +7,11 @@ GET http://localhost:3000/
 ###
 
 # GET all locations
-GET http://localhost:3000/api/locations
+GET http://localhost:3000/api/worddb
 
 ###
 
 # GET a specific location by ID
-GET http://localhost:3000/api/locations/1
+GET http://localhost:3000/api/worddb/1
 
 ###

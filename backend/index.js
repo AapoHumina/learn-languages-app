@@ -11,29 +11,30 @@ const path = require("path");
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 
-app.use("/api/locations", router);
+app.use("/api/worddb", router);
 
 
 // Create a table and insert data
 db.serialize(() => {
     // Create the table
-    db.run('CREATE TABLE IF NOT EXISTS locations (id INTEGER PRIMARY KEY, latitude DECIMAL(9,6), longitude DECIMAL(9,6))', (err) => {
+    db.run('CREATE TABLE IF NOT EXISTS worddb (id INTEGER PRIMARY KEY, finnish_word VARCHAR, english_word VARCHAR)', (err) => {
         if (err) {
             console.error('Error creating table:', err.message);
             return;
         }
 
         // Insert data after table creation
-        db.run('INSERT INTO locations (latitude, longitude) VALUES (?, ?)', [60, 60]);
-        db.run('INSERT INTO locations (latitude, longitude) VALUES (?, ?)', [70, 70]);
-        db.run('INSERT INTO locations (latitude, longitude) VALUES (?, ?)', [80, 80]);
+        db.run('INSERT INTO worddb (finnish_word, english_word) VALUES (?, ?)', ["koira", "dog"]);
+        db.run('INSERT INTO worddb (finnish_word, english_word) VALUES (?, ?)', ["kissa", "cat"]);
+        db.run('INSERT INTO worddb (finnish_word, english_word) VALUES (?, ?)', ["koti", "home"]);
+        db.run('INSERT INTO worddb (finnish_word, english_word) VALUES (?, ?)', ["joulu", "christmas"]);
     });
 });
 
 // Define the route to get all locations
-const getAllLocations = (req, res) => {
+const getAllWords = (req, res) => {
     // Query the data
-    db.all('SELECT * FROM locations ORDER BY id ASC', [], (err, rows) => {
+    db.all('SELECT * FROM worddb ORDER BY id ASC', [], (err, rows) => {
         if (err) {
             return res.status(500).json({ error: err.message });
         }
@@ -41,7 +42,7 @@ const getAllLocations = (req, res) => {
     });
 };
 
-router.get('/', getAllLocations);
+router.get('/', getAllWords);
 
 app.get('/', (req, res) => {
     res.send('Hello World!')
