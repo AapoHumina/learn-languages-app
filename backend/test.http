@@ -11,7 +11,27 @@ GET http://localhost:3000/api/worddb
 
 ###
 
-# GET a specific location by ID
-GET http://localhost:3000/api/worddb/1
+# POST a new word pair
+POST http://localhost:3000/api/worddb
+Content-Type: application/json
+
+{
+  "finnish_word": "lehmä",
+  "english_word": "cow"
+}
 
 ###
+# DELETE a location by ID
+DELETE http://localhost:3000/api/worddb/1
+
+### POST a new word pair
+PUT http://localhost:3000/api/worddb/3
+Content-Type: application/json
+
+{
+  "finnish_word": "lehmä",
+  "english_word": "cow"
+}
+
+###
+
