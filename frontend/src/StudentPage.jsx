@@ -17,7 +17,6 @@ const StudentPage = () => {
     const handleSubmit = (id, event) => {
         event.preventDefault();
         alert(`Vastasit kohtaan ${id}: ${inputs[id] || ""}`);
-        // Add logic to handle the submitted data, e.g., API call
         const points = getPoints(id);
         setScore((prevScore) => prevScore + points);
       };
@@ -26,9 +25,9 @@ const StudentPage = () => {
     const getPoints = (id) => {
         const matchedWords = words.find(w => w.id === id);
         if (inputs[id] == matchedWords.english_word) {
-            return 1; // Return the input if it exists
+            return 1; 
         } else {
-            return 0; // Return this if no input exists
+            return 0; 
         }
     };
 
@@ -91,7 +90,7 @@ const StudentPage = () => {
         </div>
       </div>
       <h1>Pisteet {score}</h1>
-      <button type="button" onClick={() => setScore(0)}>Nolla pisteet:</button>
+      <button type="button" onClick={() => setScore(0)}>Nollaa pisteet</button>
     </div>
     );
   };
