@@ -11,7 +11,7 @@ function App() {
         <nav style={navStyle}>
           <ul style={navListStyle}>
             <li style={navItemStyle}>
-              <Link to="/" style={linkStyle}>Sanaopiskelu sivu</Link>
+              <Link to="/" style={linkStyle}>Oppilaan sivu</Link>
             </li>
             <li style={navItemStyle}>
               <Link to="/second" style={linkStyle}>Opettajan sivu</Link>
@@ -29,6 +29,7 @@ function App() {
 };
 
 // CSS-in-JS tyylit
+//  made with AI
 const navStyle = {
   backgroundColor: '#333',
   padding: '10px 20px',
