@@ -5,7 +5,7 @@ const StudentPage = () => {
     const [words, setWords] = useState([]);
     const [inputs, setInputs] = useState({});
     const [score, setScore] = useState(0);
-    
+
     const handleChange = (id, value) => {
         setInputs((prevInputs) => ({
           ...prevInputs,
@@ -13,14 +13,16 @@ const StudentPage = () => {
         }));
       };
       
+    // alerting about submitting word and then raising points if right
     const handleSubmit = (id, event) => {
         event.preventDefault();
-        alert(`Submitted for word ID ${id}: ${inputs[id] || ""}`);
+        alert(`Vastasit kohtaan ${id}: ${inputs[id] || ""}`);
         // Add logic to handle the submitted data, e.g., API call
         const points = getPoints(id);
         setScore((prevScore) => prevScore + points);
       };
 
+    //if inputted word matches word in db, get a point
     const getPoints = (id) => {
         const matchedWords = words.find(w => w.id === id);
         if (inputs[id] == matchedWords.english_word) {
@@ -30,48 +32,29 @@ const StudentPage = () => {
         }
     };
 
-    
-    //The fetch() method starts the process of fetching a resource from a server.
-    //The fetch() method returns a Promise that resolves to a Response object.
+    //fetch database of wordpairs from backend
     useEffect(() => {
       const apiUrl = `/api/worddb`;
-      fetch(apiUrl)
-      .then((response) => {
-          if (!response.ok) {
-              throw new Error(`Error: ${response.statusText}`);
-          }
-          return response.json();
-      })
-      .then((data) => setWords(data))
+        fetch(apiUrl)
+        .then((response) => response.json())
+        .then((data) => setWords(data))
+        .catch((error) => console.log(error))
     }, []);
 
-    return (
-    <div>
-      <h1>Sanat</h1> 
-      <div style={{ display: "flex", gap: "30px", alignItems: "flex-start" }}>
-       <div style={{ flex: 1 }}>
-        <h2>Ensimmäinen sana lista</h2>
-       <ul style={{ listStyleType: "none", padding: 0 }}>
-        {words.map((word) => (
-          <li key={word.id}
-              style={{
+    //variable for mapping out all the finnish words in db
+    const listItemsFinnish = words.map((word) => (
+      <li style={{
                 background: "#f7bd49",
                 margin: "60px 0",
                 padding: "10px",
                 borderRadius: "24px",
                 boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
-              }}
-          >
-           {word.finnish_word}
-          </li>
-        ))}
-      </ul>
-      </div>
-      <div style={{ flex: 1 }}>
-      <h3>Toinen sana lista</h3>
-      <ul style={{ listStyleType: "none", padding: 0 }}>
-        {words.map((word) => (
-          <li key={word.id}
+              }}key={word.id}>{word.finnish_word}</li>
+    ));
+
+    //variable for mapping out forms in db
+    const listItemsEnglish = words.map((word) => (
+      <li key={word.id}
               style={{
                 background: "#f7bd49",
                 margin: "30px 0",
@@ -89,27 +72,28 @@ const StudentPage = () => {
                     onChange={(e) => handleChange(word.id, e.target.value)}
                   />
                 </label>
-                <inputs type="submit" value="Submit" />
+                <input type="submit" value="Vastaa" />
               </form>
           </li>
-        ))}
-      </ul>
+    ));
+
+    return (
+    <div>
+      <h1>Kielien opiskelua</h1>
+      <div style={{ display: "flex", gap: "30px", alignItems: "flex-start" }}>
+        <div style={{ flex: 1 }}>
+          <h2>Suomi sanat</h2>
+          <ul style={{ listStyleType: "none", padding: 0 }}>{listItemsFinnish}</ul>
+        </div>
+        <div style={{ flex: 1 }}>
+          <h2>Englanti sanat</h2>
+          <ul style={{ listStyleType: "none", padding: 0 }}>{listItemsEnglish}</ul>
+        </div>
       </div>
-      </div>
-      <h1>Pisteet {score}</h1> 
-      <div>
-        <h2>Entered Inputs:</h2>
-        <ul>
-          {words.map((word) => (
-            <li key={word.id}>
-              {word.finnish_word} - {inputs[word.id] || 'No input yet' } {" ------"}
-              {getPoints(word.id) === 1 ? "Correct" : "Incorrect"}
-            </li>
-          ))}
-        </ul>
-      </div>
+      <h1>Pisteet {score}</h1>
+      <button type="button" onClick={() => setScore(0)}>Nolla pisteet:</button>
     </div>
-  );
-};
+    );
+  };
 
 export default StudentPage;
