@@ -14,7 +14,9 @@ Technologies Used
      SQlite (Database)
      
 Known bugs:
-     updating words works locally but not online
+    " updating words works locally but not online"
+
+BUGI KORJATTU, ÄLKÄÄ IKINÄ KOODAILKO VÄSYNEENÄ. Muutama urli oli väärin niin siksi ei toiminut. nyt toimii :)))
 
 Working version online:
 https://my-fullstack-app-u42q.onrender.com/
