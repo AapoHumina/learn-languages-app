@@ -20,20 +20,6 @@ app.use(cors({
     optionsSuccessStatus: 204 // Handle preflight responses with status 204
 }));
 
-// Handle preflight request (OPTIONS) explicitly if needed
-app.use((req, res, next) => {
-    // Allow private network requests if needed
-    res.header('Access-Control-Allow-Private-Network', 'true');
-    next();
-});
-
-app.options('*', (req, res) => {
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    res.header('Access-Control-Allow-Private-Network', 'true'); // For private network resources
-    res.sendStatus(204); // Respond with 204 No Content for OPTIONS request
-});
-
 app.use("/api/worddb", worddbRoutes);
 
 const server = app.listen(port, () => {
