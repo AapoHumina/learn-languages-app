@@ -14,7 +14,7 @@ Technologies Used
      SQlite (Database)
      
 Known bugs:
-     updating words works sometimes
+     updating words works locally but not online
 
 Working version online:
 https://my-fullstack-app-u42q.onrender.com/
