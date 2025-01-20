@@ -20,7 +20,7 @@ const TeacherPage = () => {
     const handleUpdateWord = async () => {
       try {
         // Sending PUT request to update the word in the backend
-        const response = await fetch(`http://localhost:3000/api/worddb/${editWord}`, {
+        const response = await fetch(`http://localhost:3000/api/worddb/${editWord.id}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
