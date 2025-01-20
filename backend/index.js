@@ -11,14 +11,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 
 // Middleware to handle CORS
-app.use(cors({
-    origin: '*', // Allow all origins (adjust as needed)
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow specific methods
-    allowedHeaders: ['Content-Type', 'Authorization'], // Allow specific headers
-    credentials: true, // Allow credentials (cookies, headers)
-    preflightContinue: false, // Don't pass the preflight request to the next handler
-    optionsSuccessStatus: 204 // Handle preflight responses with status 204
-}));
+app.use(cors());
 
 app.use("/api/worddb", worddbRoutes);
 
