@@ -12,11 +12,14 @@ Technologies Used
      React (Frontend)
      Node.js and Express (Backend)
      SQlite (Database)
+     
+Known bugs:
+     updating words works sometimes
 
 Working version online:
 https://my-fullstack-app-u42q.onrender.com/
 
-screencast:
+screencast: https://www.youtube.com/watch?v=uk1Glrs4UuQ
 
 Here are some screenshots of website in case live version doesn't work. :)
 ![Capture](https://github.com/user-attachments/assets/91abed6f-39ca-47b6-abca-dbfc675d05ea)
