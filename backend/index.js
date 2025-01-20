@@ -10,8 +10,19 @@ const path = require("path");
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 
-// Middleware to handle CORS
-app.use(cors());
+app.use(cors({
+    origin: '*', // Allow all origins
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Explicitly allow these methods
+    allowedHeaders: ['Content-Type', 'Authorization'], // Specify allowed headers
+}));
+
+// Explicitly handle OPTIONS requests for preflight
+app.options('*', (req, res) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.sendStatus(204); // Respond with 204 No Content
+});
 
 app.use("/api/worddb", worddbRoutes);
 
