@@ -20,7 +20,7 @@ const TeacherPage = () => {
     const handleUpdateWord = async () => {
       try {
         // Sending PUT request to update the word in the backend
-        const response = await fetch(`http://localhost:3000/api/worddb/${editWord.id}`, {
+        const response = await fetch(`/api/worddb/${editWord.id}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -78,7 +78,7 @@ const TeacherPage = () => {
     const deleteWordpair = async (id) => {
       try {
         // Sending DELETE request to remove the word from the backend
-        const response = await fetch(`http://localhost:3000/api/worddb/${id}`, {
+        const response = await fetch(`/api/worddb/${id}`, {
           method: 'DELETE',
         });
 
